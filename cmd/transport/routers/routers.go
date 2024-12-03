@@ -14,7 +14,7 @@ func InitRouter(riskController v1.RiskController) *gin.Engine {
 	apiv1 := r.Group("/api/v1")
 	{
 		
-		apiv1.GET("/risks", )
+		apiv1.GET("/risks",riskController.GetRisks )
 		
 		apiv1.POST("/risks",)
 
