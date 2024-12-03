@@ -5,3 +5,4 @@ web:
   writeTimeout: 10s
   idleTimeout: 15s
   shutdownTimeout: 30s
+  serverMode: debug

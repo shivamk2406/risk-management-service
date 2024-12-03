@@ -56,25 +56,22 @@ func (r *RiskController) GetRisks(c *gin.Context) {
 
 }
 
-func (r *RiskController) AddRisk(c *gin.Context){
+func (r *RiskController) AddRisk(c *gin.Context) {
 	appG := app.Gin{C: c}
 
 	var risk models.Risk
 
-    if err := c.ShouldBindJSON(&risk); err != nil {
-        appG.Response(http.StatusBadRequest, errs.INVALID_PARAMS, nil)
-        return
-    }
+	if err := c.ShouldBindJSON(&risk); err != nil {
+		appG.Response(http.StatusBadRequest, errs.INVALID_PARAMS, nil)
+		return
+	}
 
-     resp, err := r.RiskSvc.CreateRisk(&risk)
-    if err != nil {
-        appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
-        return
-    }
+	resp, err := r.RiskSvc.CreateRisk(&risk)
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
+		return
+	}
 
-    // Respond with success
-    appG.Response(http.StatusCreated, errs.SUCCESS, resp)
-
-
+	appG.Response(http.StatusCreated, errs.SUCCESS, resp)
 
 }
