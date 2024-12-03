@@ -7,7 +7,7 @@ import (
 )
 
 type API interface {
-	GetRisk() ([]*models.Risk, error)
+	GetRisks() ([]*models.Risk, error)
 	GetRiskById(id string) (*models.Risk, error)
 	CreateRisk(risk *models.Risk) (*models.Risk, error)
 }
@@ -22,7 +22,7 @@ func NewRiskRepo() API {
 	}
 }
 
-func (r *RiskRepo) GetRisk() ([]*models.Risk, error) {
+func (r *RiskRepo) GetRisks() ([]*models.Risk, error) {
 	var risks []*models.Risk
 
 	for _, risk := range r.Risks {

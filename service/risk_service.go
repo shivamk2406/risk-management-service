@@ -17,8 +17,8 @@ func NewRiskSvc(repo repo.API) interfaces.RiskService{
 	}
 }
 
-func (r *RiskService) GetRisk() ([]*models.Risk, error) {
-	return r.repo.GetRisk()
+func (r *RiskService) GetRisks() ([]*models.Risk, error) {
+	return r.repo.GetRisks()
 }
 
 func (r *RiskService) GetRiskById(id string) (*models.Risk, error) {
