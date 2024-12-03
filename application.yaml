@@ -1,0 +1,7 @@
+web:
+  apiHost: 0.0.0.0:8080
+  debugHost: 0.0.0.0:4000
+  readTimeout: 10s
+  writeTimeout: 10s
+  idleTimeout: 15s
+  shutdownTimeout: 30s
