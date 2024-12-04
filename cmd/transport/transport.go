@@ -5,15 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/shivamk2406/risk-management-service/cmd/transport/routers"
-	v1 "github.com/shivamk2406/risk-management-service/cmd/transport/routers/api/v1"
 	"github.com/shivamk2406/risk-management-service/config"
 )
 
 
-func NewRestServer(config config.Appconfig, riskController v1.RiskController) *http.Server{
-	gin.SetMode(gin.DebugMode)
-	routersInit := routers.InitRouter(riskController)
+func NewRestServer(config config.AppConfig, routersInit *gin.Engine) *http.Server{
+	gin.SetMode(gin.ReleaseMode)
 	readTimeout := config.Web.ReadTimeout 
 	writeTimeout := config.Web.WriteTimeout 
 	endPoint := fmt.Sprintf(":%s", config.Web.APIHost)
@@ -28,5 +25,4 @@ func NewRestServer(config config.Appconfig, riskController v1.RiskController) *h
 	}
 
 	return server
-
 }

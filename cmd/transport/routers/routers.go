@@ -2,10 +2,10 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/shivamk2406/risk-management-service/service"
+	v1 "github.com/shivamk2406/risk-management-service/cmd/transport/routers/api/v1"
 )
 
-func InitRouter(riskController service.Registry) *gin.Engine {
+func InitRouter(riskController v1.RiskController) *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())

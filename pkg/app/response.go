@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	err "github.com/shivamk2406/risk-management-service/pkg/err"
 )
+
 type Gin struct {
 	C *gin.Context
 }
