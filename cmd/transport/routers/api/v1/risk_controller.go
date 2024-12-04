@@ -1,14 +1,14 @@
 package v1
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
+	"github.com/shivamk2406/risk-management-service/enums"
 	"github.com/shivamk2406/risk-management-service/interfaces"
-	"github.com/shivamk2406/risk-management-service/models"
+	"github.com/shivamk2406/risk-management-service/internal/models"
 	"github.com/shivamk2406/risk-management-service/pkg/app"
 	errs "github.com/shivamk2406/risk-management-service/pkg/err"
 )
@@ -48,10 +48,9 @@ func (r *RiskController) GetRisksById(c *gin.Context) {
 		appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
 	}
 
-appG.Response(http.StatusOK, errs.SUCCESS, risks)
+	appG.Response(http.StatusOK, errs.SUCCESS, risks)
 
 }
-
 
 // @Summary Get list of available risks
 // @Produce  json
@@ -64,6 +63,7 @@ func (r *RiskController) GetRisks(c *gin.Context) {
 	risks, err := r.RiskSvc.GetRisks()
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
+		return
 	}
 	appG.Response(http.StatusOK, errs.SUCCESS, risks)
 
@@ -82,8 +82,15 @@ func (r *RiskController) AddRisk(c *gin.Context) {
 	var risk models.RiskRequestDto
 
 	if err := c.Bind(&risk); err != nil {
-		fmt.Println(err)
 		appG.Response(http.StatusBadRequest, errs.INVALID_PARAMS, nil)
+		return
+	}
+
+	err := validation.ValidateStruct(&risk,
+		validation.Field(&risk.State, validation.Required, validation.In(enums.RiskStateStrings())),
+	)
+	if err != nil {
+		appG.Response(http.StatusBadRequest, errs.ERROR, nil)
 		return
 	}
 

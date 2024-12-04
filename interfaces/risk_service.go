@@ -1,6 +1,6 @@
 package interfaces
 
-import "github.com/shivamk2406/risk-management-service/models"
+import "github.com/shivamk2406/risk-management-service/internal/models"
 
 type RiskService interface {
 	GetRisks() ([]*models.Risk, error)

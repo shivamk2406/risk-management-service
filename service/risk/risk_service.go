@@ -4,8 +4,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/shivamk2406/risk-management-service/enums"
 	"github.com/shivamk2406/risk-management-service/interfaces"
-	"github.com/shivamk2406/risk-management-service/models"
-	"github.com/shivamk2406/risk-management-service/repo"
+	"github.com/shivamk2406/risk-management-service/internal/models"
+	"github.com/shivamk2406/risk-management-service/internal/repo"
 )
 
 type RiskService struct {

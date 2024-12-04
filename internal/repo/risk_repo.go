@@ -3,7 +3,7 @@ package repo
 import (
 	"fmt"
 
-	"github.com/shivamk2406/risk-management-service/models"
+	"github.com/shivamk2406/risk-management-service/internal/models"
 )
 
 type API interface {

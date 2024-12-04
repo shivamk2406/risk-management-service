@@ -11,7 +11,7 @@ import (
 	"github.com/shivamk2406/risk-management-service/cmd/transport/routers"
 	v1 "github.com/shivamk2406/risk-management-service/cmd/transport/routers/api/v1"
 	"github.com/shivamk2406/risk-management-service/config"
-	"github.com/shivamk2406/risk-management-service/repo"
+	"github.com/shivamk2406/risk-management-service/internal/repo"
 	service "github.com/shivamk2406/risk-management-service/service/risk"
 )
 
