@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
+	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
 	"github.com/shivamk2406/risk-management-service/enums"
 	"github.com/shivamk2406/risk-management-service/interfaces"
 	"github.com/shivamk2406/risk-management-service/internal/models"
@@ -30,6 +31,8 @@ func NewRiskController(riskSvc interfaces.RiskService) RiskController {
 // @Failure 500 {object} app.Response
 // @Router /risks/{id} [get]
 func (r *RiskController) GetRisksById(c *gin.Context) {
+	logger := ctxzap.Extract(c).Sugar()
+
 	appG := app.Gin{C: c}
 	id := c.Param("id")
 	err := validation.Validate(id,
@@ -39,12 +42,14 @@ func (r *RiskController) GetRisksById(c *gin.Context) {
 	)
 
 	if err != nil {
+		logger.Errorf("error in the request %s",err.Error())
 		appG.Response(http.StatusBadRequest, errs.INVALID_PARAMS, nil)
 		return
 	}
 
 	risks, err := r.RiskSvc.GetRiskById(id)
 	if err != nil {
+		logger.Errorf("error while fetching risk by id for id: %s error: %s",id, err.Error())
 		appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
 	}
 
@@ -58,10 +63,13 @@ func (r *RiskController) GetRisksById(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router /risks [get]
 func (r *RiskController) GetRisks(c *gin.Context) {
+	logger := ctxzap.Extract(c).Sugar()
+
 	appG := app.Gin{C: c}
 
 	risks, err := r.RiskSvc.GetRisks()
 	if err != nil {
+		logger.Errorf("error while fetching risk %s",err.Error())
 		appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
 		return
 	}
@@ -77,11 +85,13 @@ func (r *RiskController) GetRisks(c *gin.Context) {
 // @Failure 500 {object} app.Response
 // @Router /risks [post]
 func (r *RiskController) AddRisk(c *gin.Context) {
+	logger := ctxzap.Extract(c).Sugar()
 	appG := app.Gin{C: c}
 
 	var risk models.RiskRequestDto
 
 	if err := c.Bind(&risk); err != nil {
+		logger.Errorf("error while binding risk to struct %s",err.Error())
 		appG.Response(http.StatusBadRequest, errs.INVALID_PARAMS, nil)
 		return
 	}
@@ -90,12 +100,14 @@ func (r *RiskController) AddRisk(c *gin.Context) {
 		validation.Field(&risk.State, validation.Required, validation.In(enums.RiskStateStrings())),
 	)
 	if err != nil {
+		logger.Errorf("error in the risk provided as input %s",err.Error())
 		appG.Response(http.StatusBadRequest, errs.ERROR, nil)
 		return
 	}
 
 	resp, err := r.RiskSvc.CreateRisk(&risk)
 	if err != nil {
+		logger.Errorf("error while creating risk %s",err.Error())
 		appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
 		return
 	}
