@@ -23,7 +23,7 @@ func NewRiskController(riskSvc interfaces.RiskService) RiskController {
 	}
 }
 
-// @Summary Get a single Risk
+// @Summary Get risk by id
 // @Produce  json
 // @Param id path string true "ID"
 // @Success 200 {object} app.Response
@@ -53,7 +53,7 @@ appG.Response(http.StatusOK, errs.SUCCESS, risks)
 }
 
 
-// @Summary Get multiple risks
+// @Summary Get list of available risks
 // @Produce  json
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
@@ -69,10 +69,10 @@ func (r *RiskController) GetRisks(c *gin.Context) {
 
 }
 
-// @Summary Add risks
+// @Summary Add risk
 // @Produce  json
 // @Accept json
-// @Param risk body models.RiskRequestDto true "risk"
+// @Param risk body models.RiskRequestDto true "risk request model"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /risks [post]

@@ -32,12 +32,12 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.Response'
-      summary: Get multiple risks
+      summary: Get list of available risks
     post:
       consumes:
       - application/json
       parameters:
-      - description: risk
+      - description: risk request model
         in: body
         name: risk
         required: true
@@ -54,7 +54,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.Response'
-      summary: Add risks
+      summary: Add risk
   /risks/{id}:
     get:
       parameters:
@@ -74,5 +74,5 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.Response'
-      summary: Get a single Risk
+      summary: Get risk by id
 swagger: "2.0"

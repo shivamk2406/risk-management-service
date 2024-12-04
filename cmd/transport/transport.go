@@ -10,7 +10,7 @@ import (
 
 
 func NewRestServer(config config.AppConfig, routersInit *gin.Engine) *http.Server{
-	gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(config.Web.ServerMode)
 	readTimeout := config.Web.ReadTimeout 
 	writeTimeout := config.Web.WriteTimeout 
 	endPoint := fmt.Sprintf(":%s", config.Web.APIHost)

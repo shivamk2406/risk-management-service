@@ -1,6 +1,6 @@
 web:
   apiHost: 8080
-  debugHost: 0.0.0.0:4000
+  debugHost: 4000
   readTimeout: 10s
   writeTimeout: 10s
   idleTimeout: 15s

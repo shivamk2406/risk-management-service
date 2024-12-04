@@ -20,7 +20,7 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Get multiple risks",
+                "summary": "Get list of available risks",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -43,10 +43,10 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Add risks",
+                "summary": "Add risk",
                 "parameters": [
                     {
-                        "description": "risk",
+                        "description": "risk request model",
                         "name": "risk",
                         "in": "body",
                         "required": true,
@@ -76,7 +76,7 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Get a single Risk",
+                "summary": "Get risk by id",
                 "parameters": [
                     {
                         "type": "string",
