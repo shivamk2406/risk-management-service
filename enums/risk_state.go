@@ -1,7 +1,7 @@
 package enums
 
 const (
-	UnspecifiedTenantRequest RiskState = iota
+	UnspecifiedRiskStateRequest RiskState = iota
 	OPEN
 	CLOSED
 	ACCEPTED

@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _RiskStateName = "UnspecifiedTenantRequestOPENCLOSEDACCEPTEDINVESTIGATING"
+const _RiskStateName = "UnspecifiedRiskStateRequestOPENCLOSEDACCEPTEDINVESTIGATING"
 
-var _RiskStateIndex = [...]uint8{0, 24, 28, 34, 42, 55}
+var _RiskStateIndex = [...]uint8{0, 27, 31, 37, 45, 58}
 
-const _RiskStateLowerName = "unspecifiedtenantrequestopenclosedacceptedinvestigating"
+const _RiskStateLowerName = "unspecifiedriskstaterequestopenclosedacceptedinvestigating"
 
 func (i RiskState) String() string {
 	if i < 0 || i >= RiskState(len(_RiskStateIndex)-1) {
@@ -25,34 +25,34 @@ func (i RiskState) String() string {
 // Re-run the stringer command to generate them again.
 func _RiskStateNoOp() {
 	var x [1]struct{}
-	_ = x[UnspecifiedTenantRequest-(0)]
+	_ = x[UnspecifiedRiskStateRequest-(0)]
 	_ = x[OPEN-(1)]
 	_ = x[CLOSED-(2)]
 	_ = x[ACCEPTED-(3)]
 	_ = x[INVESTIGATING-(4)]
 }
 
-var _RiskStateValues = []RiskState{UnspecifiedTenantRequest, OPEN, CLOSED, ACCEPTED, INVESTIGATING}
+var _RiskStateValues = []RiskState{UnspecifiedRiskStateRequest, OPEN, CLOSED, ACCEPTED, INVESTIGATING}
 
 var _RiskStateNameToValueMap = map[string]RiskState{
-	_RiskStateName[0:24]:       UnspecifiedTenantRequest,
-	_RiskStateLowerName[0:24]:  UnspecifiedTenantRequest,
-	_RiskStateName[24:28]:      OPEN,
-	_RiskStateLowerName[24:28]: OPEN,
-	_RiskStateName[28:34]:      CLOSED,
-	_RiskStateLowerName[28:34]: CLOSED,
-	_RiskStateName[34:42]:      ACCEPTED,
-	_RiskStateLowerName[34:42]: ACCEPTED,
-	_RiskStateName[42:55]:      INVESTIGATING,
-	_RiskStateLowerName[42:55]: INVESTIGATING,
+	_RiskStateName[0:27]:       UnspecifiedRiskStateRequest,
+	_RiskStateLowerName[0:27]:  UnspecifiedRiskStateRequest,
+	_RiskStateName[27:31]:      OPEN,
+	_RiskStateLowerName[27:31]: OPEN,
+	_RiskStateName[31:37]:      CLOSED,
+	_RiskStateLowerName[31:37]: CLOSED,
+	_RiskStateName[37:45]:      ACCEPTED,
+	_RiskStateLowerName[37:45]: ACCEPTED,
+	_RiskStateName[45:58]:      INVESTIGATING,
+	_RiskStateLowerName[45:58]: INVESTIGATING,
 }
 
 var _RiskStateNames = []string{
-	_RiskStateName[0:24],
-	_RiskStateName[24:28],
-	_RiskStateName[28:34],
-	_RiskStateName[34:42],
-	_RiskStateName[42:55],
+	_RiskStateName[0:27],
+	_RiskStateName[27:31],
+	_RiskStateName[31:37],
+	_RiskStateName[37:45],
+	_RiskStateName[45:58],
 }
 
 // RiskStateString retrieves an enum value from the enum constants string name.
