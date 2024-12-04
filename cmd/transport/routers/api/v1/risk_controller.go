@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,6 +23,12 @@ func NewRiskController(riskSvc interfaces.RiskService) RiskController {
 	}
 }
 
+// @Summary Get a single Risk
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /risks/{id} [get]
 func (r *RiskController) GetRisksById(c *gin.Context) {
 	appG := app.Gin{C: c}
 	id := c.Param("id")
@@ -41,10 +48,16 @@ func (r *RiskController) GetRisksById(c *gin.Context) {
 		appG.Response(http.StatusInternalServerError, errs.ERROR, nil)
 	}
 
-	appG.Response(http.StatusOK, errs.SUCCESS, risks)
+appG.Response(http.StatusOK, errs.SUCCESS, risks)
 
 }
 
+
+// @Summary Get multiple risks
+// @Produce  json
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /risks [get]
 func (r *RiskController) GetRisks(c *gin.Context) {
 	appG := app.Gin{C: c}
 
@@ -56,12 +69,20 @@ func (r *RiskController) GetRisks(c *gin.Context) {
 
 }
 
+// @Summary Add risks
+// @Produce  json
+// @Accept json
+// @Param risk body models.RiskRequestDto true "risk"
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /risks [post]
 func (r *RiskController) AddRisk(c *gin.Context) {
 	appG := app.Gin{C: c}
 
-	var risk models.Risk
+	var risk models.RiskRequestDto
 
-	if err := c.ShouldBindJSON(&risk); err != nil {
+	if err := c.Bind(&risk); err != nil {
+		fmt.Println(err)
 		appG.Response(http.StatusBadRequest, errs.INVALID_PARAMS, nil)
 		return
 	}

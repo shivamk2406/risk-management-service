@@ -11,3 +11,9 @@ type Risk struct {
 	Title       string
 	Description string
 }
+
+type RiskRequestDto struct {
+	State       string
+	Title       string
+	Description string
+}

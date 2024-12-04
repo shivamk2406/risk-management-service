@@ -9,3 +9,10 @@ const (
 )
 
 type RiskState int
+
+var RiskStateMap = map[string]RiskState{
+	"OPEN":          OPEN,
+	"CLOSED":        CLOSED,
+	"ACCEPTED":      ACCEPTED,
+	"INVESTIGATING": INVESTIGATING,
+}
